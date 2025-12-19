@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftRate Pro | Global Fintech Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="mesh-gradient"></div>
+    <div class="glow-orb" id="orb-1"></div>
+    <div class="glow-orb" id="orb-2"></div>
+
+    <main class="app-container">
+        <aside class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon"><i class="fas fa-bolt-lightning"></i></div>
+                <span class="logo-text">SwiftRate</span>
+            </div>
+            <nav class="side-nav">
+                <div class="nav-item active"><i class="fas fa-repeat"></i></div>
+                <div class="nav-item"><i class="fas fa-chart-line"></i></div>
+                <div class="nav-item"><i class="fas fa-wallet"></i></div>
+            </nav>
+            <button id="theme-toggle" class="nav-item theme-switch">
+                <i class="fas fa-moon"></i>
+            </button>
+        </aside>
+
+        <section class="converter-view">
+            <header class="view-header">
+                <div>
+                    <h1>Currency Exchange</h1>
+                    <p>Live mid-market rate</p>
+                </div>
+                <div class="live-status">
+                    <span class="status-dot"></span>
+                    Live Data
+                </div>
+            </header>
+
+            <div class="conversion-card">
+                <div class="input-panel from-panel">
+                    <div class="panel-header">
+                        <span class="label">You send</span>
+                        <select id="from-currency" class="currency-picker"></select>
+                    </div>
+                    <div class="input-row">
+                        <input type="number" id="amount" value="1000" placeholder="0.00">
+                        <span class="currency-code-display" id="from-code">BDT</span>
+                    </div>
+                </div>
+
+                <div class="interaction-hub">
+                    <div class="divider"></div>
+                    <button id="swap-btn" class="main-swap-btn">
+                        <i class="fas fa-arrows-up-down"></i>
+                    </button>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="input-panel to-panel">
+                    <div class="panel-header">
+                        <span class="label">They receive</span>
+                        <select id="to-currency" class="currency-picker"></select>
+                    </div>
+                    <div class="input-row">
+                        <div id="target-amount" class="result-text">---</div>
+                        <span class="currency-code-display" id="to-code">USD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-footer">
+                <div class="rate-details">
+                    <div class="rate-box">
+                        <span class="rate-label">Current Rate</span>
+                        <span id="exchange-rate-value" class="rate-value">Calculating...</span>
+                    </div>
+                    <div class="rate-box">
+                        <span class="rate-label">Last Updated</span>
+                        <span id="update-time" class="rate-value">Just now</span>
+                    </div>
+                </div>
+                
+                <div id="error-container" class="error-toast hidden">
+                    <i class="fas fa-circle-exclamation"></i>
+                    <span id="error-message"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="loader" class="loader-screen">
+        <div class="premium-loader"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
