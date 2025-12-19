@@ -1,0 +1,2 @@
+# ExchangeRate
+SwiftRate Pro: A modern fintech-style currency converter. This project features a clean glassmorphism UI, automatic dark/light theme switching, and real-time data fetching using the Fetch API. Optimized for all devices with a mobile-first design
