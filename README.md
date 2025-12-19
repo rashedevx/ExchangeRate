@@ -31,7 +31,7 @@ Clone the repository:
 
 Bash
 
-git clone https://github.com/your-username/ExchangeRate.git
+git clone https://github.com/your-username/ExchangeRate.git](https://github.com/rashedevx/ExchangeRate.git)
 Navigate to the project folder:
 
 Bash
