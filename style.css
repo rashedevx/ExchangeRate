@@ -1,0 +1,268 @@
+/* 1. Theme Variables - Dark by Default */
+:root {
+    --bg-deep: #0a0b10;
+    --card-glass: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-dim: #8a8f9d;
+    --accent-blue: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.5);
+    --panel-bg: rgba(255, 255, 255, 0.03);
+    --error-red: #ff4d4d;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+    --bg-deep: #f4f7fe;
+    --card-glass: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(0, 0, 0, 0.05);
+    --text-main: #1a1d23;
+    --text-dim: #64748b;
+    --panel-bg: #ffffff;
+}
+
+/* 2. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden; /* Changed from hidden to allow vertical scroll */
+    padding: 20px;
+}
+
+/* 3. Background Aesthetics */
+.mesh-gradient {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 0% 0%, #161b33 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #0d1117 0%, transparent 50%);
+    z-index: -2;
+}
+
+.glow-orb {
+    position: absolute; width: 300px; height: 300px;
+    border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.15;
+}
+#orb-1 { top: -50px; left: -50px; background: var(--accent-blue); }
+#orb-2 { bottom: -50px; right: -50px; background: #8b5cf6; }
+
+/* 4. Main Layout */
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 600px; /* Use min-height instead of fixed height */
+    background: var(--card-glass);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 80px;
+    border-right: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    gap: 30px;
+}
+
+.logo-icon {
+    width: 42px; height: 42px; background: var(--accent-blue);
+    border-radius: 12px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; color: white;
+}
+
+.nav-item {
+    width: 45px; height: 45px; display: flex; align-items: center;
+    justify-content: center; border-radius: 12px; cursor: pointer;
+    color: var(--text-dim); transition: 0.3s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: var(--panel-bg); color: var(--accent-blue);
+}
+
+.theme-switch { margin-top: auto; border: 1px solid var(--card-border); }
+
+/* Converter Section */
+.converter-view {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; }
+.view-header p { color: var(--text-dim); font-size: 0.9rem; }
+
+.live-status {
+    padding: 6px 12px; background: rgba(34, 197, 94, 0.1);
+    color: #22c55e; border-radius: 100px; font-size: 0.7rem;
+    font-weight: 700; display: flex; align-items: center; gap: 6px;
+}
+
+.status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
+
+/* Conversion Card Logic */
+.conversion-card {
+    background: var(--panel-bg);
+    border-radius: 24px;
+    border: 1px solid var(--card-border);
+    padding: 10px;
+}
+
+.input-panel { padding: 20px; }
+
+.panel-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.label { text-transform: uppercase; font-size: 0.65rem; font-weight: 800; color: var(--text-dim); letter-spacing: 1px; }
+
+.currency-picker {
+    background: transparent; border: none; color: var(--text-main);
+    font-weight: 700; cursor: pointer; font-size: 0.9rem; outline: none;
+    max-width: 150px;
+}
+
+.input-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+input[type="number"] {
+    background: transparent; border: none; font-size: 2.5rem; font-weight: 700;
+    color: var(--text-main); width: 100%; outline: none;
+}
+
+.result-text { font-size: 2.5rem; font-weight: 700; color: var(--accent-blue); overflow: hidden; text-overflow: ellipsis; }
+
+.currency-code-display { font-size: 1.2rem; font-weight: 800; color: var(--text-dim); }
+
+/* Interaction Hub (Swap) */
+.interaction-hub { display: flex; align-items: center; position: relative; height: 2px; margin: 10px 0; }
+.divider { flex: 1; height: 1px; background: var(--card-border); }
+.main-swap-btn {
+    width: 50px; height: 50px; border-radius: 15px; background: var(--bg-deep);
+    border: 1px solid var(--card-border); color: var(--text-main); cursor: pointer;
+    z-index: 10; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.main-swap-btn:hover { background: var(--accent-blue); transform: scale(1.1) rotate(180deg); color: white; }
+
+/* Footer Info */
+.info-footer { margin-top: 30px; }
+.rate-details { display: flex; gap: 30px; padding-top: 20px; border-top: 1px solid var(--card-border); }
+.rate-box { display: flex; flex-direction: column; gap: 2px; }
+.rate-label { font-size: 0.7rem; color: var(--text-dim); }
+.rate-value { font-weight: 600; font-size: 0.85rem; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body { padding: 10px; align-items: flex-start; }
+    
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        justify-content: space-between;
+    }
+    
+    .logo-section .logo-text { display: none; }
+    .side-nav { display: flex; gap: 10px; }
+    .theme-switch { margin-top: 0; }
+
+    .converter-view { padding: 25px 20px; }
+    
+    input[type="number"], .result-text { font-size: 1.8rem; }
+    
+    h1 { font-size: 1.5rem; }
+    
+    .rate-details { flex-direction: column; gap: 15px; }
+}
+
+/* Loader Overlay */
+.loader-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-deep); display: flex; align-items: center;
+    justify-content: center; z-index: 1000; transition: opacity 0.5s;
+}
+.premium-loader {
+    width: 50px; height: 50px; border: 3px solid var(--card-border);
+    border-top-color: var(--accent-blue); border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.hidden { display: none !important; }
+
+
+/* Fix for Currency Selection Visibility */
+.currency-picker option {
+    background-color: var(--panel-bg); /* Uses the theme's panel color */
+    color: var(--text-main);           /* Uses the theme's main text color */
+    padding: 10px;
+}
+
+/* Specific fix for Dark Mode dropdown visibility */
+[data-theme="dark"] .currency-picker option {
+    background-color: #1a1d23; /* A solid dark color to prevent transparency issues */
+    color: #ffffff;            /* Force white text in dark mode */
+}
+
+/* Specific fix for Light Mode dropdown visibility */
+[data-theme="light"] .currency-picker option {
+    background-color: #ffffff; /* Solid white background */
+    color: #1a1d23;            /* Force dark text in light mode */
+}
+
+/* Focus state for better UX */
+.currency-picker:focus {
+    outline: 2px solid var(--accent-blue);
+    border-radius: 8px;
+}
+
+/* Removes arrows/spinners from number inputs */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
